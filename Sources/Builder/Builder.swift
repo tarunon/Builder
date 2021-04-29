@@ -14,6 +14,15 @@ public struct Builder {
         component
     }
     
+    @_disfavoredOverload
+    public static func buildEither<T, F>(first component: T) -> Either<T, F> {
+        .left(component)
+    }
+    
+    @_disfavoredOverload
+    public static func buildEither<T, F>(second component: F) -> Either<T, F> {
+        .right(component)
+    }
     
     public static func buildOptional<C>(_ component: C?) -> C? {
         component

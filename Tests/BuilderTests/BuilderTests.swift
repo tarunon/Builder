@@ -44,5 +44,27 @@
             
             print(a)
         }
+        
+        func testAcceptEither() {
+            let flag = true
+            let a = build {
+                if flag {
+                    1
+                } else {
+                    "test"
+                }
+            }
+            
+            print(type(of: a))
+            
+            let b = (0..<30).map(build {
+                if $0 % 15 == 0 {
+                    "flip flop"
+                } else {
+                    $0
+                }
+            })
+            
+            print(b)
         }
     }
