@@ -107,20 +107,21 @@ final class BuilderTypesTests: XCTestCase {
 //        XCTAssertTrue(a is [BuildSet.Either<String, BuildSet.Either<String, Int>>])
 //    }
     
-    func testOptimizeLCTEitherSwitch() {
-        let a = (0..<30).map(builder { n in
-            switch (n % 3, n % 5) {
-            case (0, 0):
-                "fizzbuzz"
-            case (0, _):
-                "fizz"
-            case (_, 0):
-                "buzz"
-            default:
-                n
-            }
-        })
-
-        XCTAssertTrue(a is [BuildSet.Either<String, BuildSet.Either<String, Int>>])
-    }
+// Note: In Swift5.5, this function cannot compile no longer.
+//    func testOptimizeLCTEitherSwitch() {
+//        let a = (0..<30).map(builder { n in
+//            switch (n % 3, n % 5) {
+//            case (0, 0):
+//                "fizzbuzz"
+//            case (0, _):
+//                "fizz"
+//            case (_, 0):
+//                "buzz"
+//            default:
+//                n
+//            }
+//        })
+//
+//        XCTAssertTrue(a is [BuildSet.Either<String, BuildSet.Either<String, Int>>])
+//    }
 }
