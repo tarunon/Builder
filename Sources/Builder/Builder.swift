@@ -53,20 +53,20 @@ public struct Builder<LeastCommon, Return> {
 }
 
 @_disfavoredOverload
-public func build<Return>(@Builder<Return, Return> _ f: @Sendable () throws -> Return) rethrows -> Return {
+public func build<Return>(@Builder<Return, Return> _ f: () throws -> Return) rethrows -> Return {
     try f()
 }
 
-public func build<LeastCommon, Return>(_ leastCommonType: LeastCommon.Type = LeastCommon.self, @Builder<LeastCommon, Return> _ f: @Sendable () throws -> Return) rethrows -> Return {
+public func build<LeastCommon, Return>(_ leastCommonType: LeastCommon.Type = LeastCommon.self, @Builder<LeastCommon, Return> _ f: () throws -> Return) rethrows -> Return {
     try f()
 }
 
 @_disfavoredOverload
-public func build<Return>(@Builder<Return, Return> _ f: @Sendable () async throws -> Return) async rethrows -> Return {
+public func build<Return>(@Builder<Return, Return> _ f: () async throws -> Return) async rethrows -> Return {
     try await f()
 }
 
-public func build<LeastCommon, Return>(_ leastCommonType: LeastCommon.Type = LeastCommon.self, @Builder<LeastCommon, Return> _ f: @Sendable () async throws -> Return) async rethrows  -> Return {
+public func build<LeastCommon, Return>(_ leastCommonType: LeastCommon.Type = LeastCommon.self, @Builder<LeastCommon, Return> _ f: () async throws -> Return) async rethrows  -> Return {
     try await f()
 }
 
