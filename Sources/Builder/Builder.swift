@@ -53,12 +53,21 @@ public struct Builder<LeastCommon, Return> {
 }
 
 @_disfavoredOverload
-public func build<Return>(@Builder<Return, Return> _ f: @escaping () -> Return) -> Return {
-    f()
+public func build<Return>(@Builder<Return, Return> _ f: @Sendable () throws -> Return) rethrows -> Return {
+    try f()
 }
 
-public func build<LeastCommon, Return>(_ leastCommonType: LeastCommon.Type = LeastCommon.self, @Builder<LeastCommon, Return> _ f: @escaping () -> Return) -> Return {
-    f()
+public func build<LeastCommon, Return>(_ leastCommonType: LeastCommon.Type = LeastCommon.self, @Builder<LeastCommon, Return> _ f: @Sendable () throws -> Return) rethrows -> Return {
+    try f()
+}
+
+@_disfavoredOverload
+public func build<Return>(@Builder<Return, Return> _ f: @Sendable () async throws -> Return) async rethrows -> Return {
+    try await f()
+}
+
+public func build<LeastCommon, Return>(_ leastCommonType: LeastCommon.Type = LeastCommon.self, @Builder<LeastCommon, Return> _ f: @Sendable () async throws -> Return) async rethrows  -> Return {
+    try await f()
 }
 
 @_disfavoredOverload
@@ -67,5 +76,33 @@ public func builder<Argument, Return>(@Builder<Return, Return> _ f: @escaping (A
 }
 
 public func builder<LeastCommon, Argument, Return>(_ leastCommonType: LeastCommon.Type = LeastCommon.self, @Builder<LeastCommon, Return> _ f: @escaping (Argument) -> Return) -> (Argument) -> Return {
+    f
+}
+
+
+@_disfavoredOverload
+public func builder<Argument, Return>(@Builder<Return, Return> _ f: @escaping (Argument) throws -> Return) -> (Argument) throws -> Return {
+    f
+}
+
+public func builder<LeastCommon, Argument, Return>(_ leastCommonType: LeastCommon.Type = LeastCommon.self, @Builder<LeastCommon, Return> _ f: @escaping (Argument) throws -> Return) -> (Argument) throws -> Return {
+    f
+}
+
+@_disfavoredOverload
+public func builder<Argument, Return>(@Builder<Return, Return> _ f: @escaping (Argument) async -> Return) -> (Argument) async -> Return {
+    f
+}
+
+public func builder<LeastCommon, Argument, Return>(_ leastCommonType: LeastCommon.Type = LeastCommon.self, @Builder<LeastCommon, Return> _ f: @escaping (Argument) async -> Return) -> (Argument) async -> Return {
+    f
+}
+
+@_disfavoredOverload
+public func builder<Argument, Return>(@Builder<Return, Return> _ f: @escaping (Argument) async throws -> Return) -> (Argument) async throws -> Return {
+    f
+}
+
+public func builder<LeastCommon, Argument, Return>(_ leastCommonType: LeastCommon.Type = LeastCommon.self, @Builder<LeastCommon, Return> _ f: @escaping (Argument) async throws -> Return) -> (Argument) async throws -> Return {
     f
 }
